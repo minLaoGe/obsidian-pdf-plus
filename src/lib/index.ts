@@ -836,7 +836,7 @@ export class PDFPlusLib {
         return await this.loadPdfLibDocumentFromArrayBuffer(buffer);
     }
 
-    async loadPdfLibDocumentFromArrayBuffer(buffer: ArrayBuffer, readonly: boolean = false): Promise<PDFDocument> {
+    async loadPdfLibDocumentFromArrayBuffer(buffer: ArrayBuffer | Uint8Array, readonly: boolean = false): Promise<PDFDocument> {
         try {
             return await PDFDocument.load(buffer, { ignoreEncryption: readonly });
         } catch (e) {

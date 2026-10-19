@@ -1,9 +1,9 @@
 {
     "id": "pdf-plus",
-    "name": "PDF++",
+    "name": "PDF++ (Reading Sync Dev)",
     "version": "0.40.31",
     "minAppVersion": "1.5.8",
-    "description": "The most Obsidian-native PDF annotation tool ever.",
+    "description": "The most Obsidian-native PDF annotation tool ever. Custom development build with vault-synced reading positions.",
     "author": "Ryota Ushio",
     "authorUrl": "https://github.com/RyotaUshio",
     "fundingUrl": {

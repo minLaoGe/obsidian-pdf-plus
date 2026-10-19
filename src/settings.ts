@@ -87,6 +87,7 @@ const MOBILE_COPY_ACTIONS = {
 } as const;
 
 export interface PDFPlusSettings {
+	readingProgressSync: boolean;
 	displayTextFormats: NamedTemplate[];
 	defaultDisplayTextFormatIndex: number,
 	syncDisplayTextFormat: boolean;
@@ -311,6 +312,7 @@ export interface PDFPlusSettings {
 }
 
 export const DEFAULT_SETTINGS: PDFPlusSettings = {
+	readingProgressSync: true,
 	displayTextFormats: [
 		// {
 		// 	name: 'Obsidian default',
@@ -1594,6 +1596,11 @@ export class PDFPlusSettingTab extends PluginSettingTab {
 		this.contentEl.empty();
 		this.promises = [];
 		this.component.load();
+        new Setting(this.contentEl).setName('跨设备 PDF 阅读进度').setDesc('同步 PDF++ Reading Progress 目录及 PDF，各端安装此版本。重新打开时续读，页码链接优先。')
+            .addToggle(toggle => toggle.setValue(this.plugin.settings.readingProgressSync).onChange(async value => {
+                this.plugin.settings.readingProgressSync = value;
+                await this.plugin.saveSettings();
+            }));
 
 
 		// Show which section is currently being displayed by highlighting the corresponding icon in the header.

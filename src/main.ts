@@ -1,3 +1,4 @@
+import { ReadingProgressSync } from './reading-progress';
 import { Constructor, EventRef, Events, FileSystemAdapter, Keymap, Menu, Notice, ObsidianProtocolData, PaneType, Platform, Plugin, SettingTab, TFile, addIcon, apiVersion, loadPdfJs, requireApiVersion } from 'obsidian';
 import * as pdflib from '@cantoo/pdf-lib';
 
@@ -88,6 +89,8 @@ export default class PDFPlus extends Plugin {
 	requiresDataviewInlineFieldsMigration = false;
 	isDebugMode: boolean = false;
 
+	readingProgress: ReadingProgressSync;
+
 	async onload() {
 		this.checkVersion();
 
@@ -97,6 +100,7 @@ export default class PDFPlus extends Plugin {
 
 		await this.loadSettings();
 		await this.saveSettings();
+		this.readingProgress = this.addChild(new ReadingProgressSync(this));
 
 		this.domManager = this.addChild(new DomManager(this));
 		this.domManager.registerCalloutRenderer();

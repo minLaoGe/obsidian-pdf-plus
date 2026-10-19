@@ -44,6 +44,9 @@ export const patchPDFView = (plugin: PDFPlus): boolean => {
                         const self = this as PDFView;
                         const child = self.viewer.child;
                         const pdfViewer = child?.pdfViewer?.pdfViewer;
+                        const progress = plugin.readingProgress.restored.get(self.viewer);
+                        if (progress && progress.page <= (pdfViewer?.pagesCount ?? Infinity)) state = { ...state, ...progress };
+                        plugin.readingProgress.restored.delete(self.viewer);
                         if (typeof state.page === 'number') {
                             if (pdfViewer) {
                                 lib.applyPDFViewStateToViewer(pdfViewer, state);

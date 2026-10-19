@@ -597,6 +597,7 @@ interface EventBus {
 }
 
 interface PDFJsEventMap {
+    updateviewarea: { source: PDFViewer };
     outlineloaded: { source: PDFOutlineViewer, outlineCount: number, currentOutlineItemPromise: Promise<void> };
     thumbnailrendered: { source: PDFThumbnailView, pageNumber: number, pdfPage: PDFPageProxy };
     sidebarviewchanged: { source: PDFSidebar, view: SidebarView };
